@@ -3,10 +3,10 @@ from django.shortcuts import render
 def labeling_view(request):
     photos = ['labeling/img/5.jpg']
     sets = {
-        'textures': ['lisses', 'ondulés', 'bouclés', 'frisés'],
-        'colors': ['noir', 'blonde', 'brun', 'roux'],
-        'lengths': ['longues', 'mi-longues', 'courts'],
-        'volumes': ['volumineux', 'lâches', 'normaux'],
+        'frisure': ['lisses', 'ondulés', 'bouclés', 'frisés'],
+        'couleur': ['noir', 'blonde', 'brun', 'roux'],
+        'longeur': ['longues', 'mi-longues', 'courts'],
+        'volume': ['volumineux', 'lâches', 'normaux'],
     }
 
     context = {
