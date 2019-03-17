@@ -5,8 +5,9 @@ def labeling_view(request):
     sets = {
         'frisure': ['lisses', 'ondulés', 'bouclés', 'frisés'],
         'couleur': ['noir', 'blonde', 'brun', 'roux'],
-        'longeur': ['longues', 'mi-longues', 'courts'],
+        'longeur': ['longues', 'mi-longues', 'courts', 'extra-courts'],
         'volume': ['volumineux', 'lâches', 'normaux'],
+
     }
 
     context = {

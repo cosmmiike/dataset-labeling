@@ -1,7 +1,5 @@
 * {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  /* outline: 1px solid blue;
-  background: rgba(255, 0, 0, 0.1); */
 }
 
 .labeling {
@@ -17,8 +15,11 @@
 
 .labeling__photo {
   float: left;
-  border-radius: 20px;
   margin-right: 50px;
+}
+
+.labeling__img {
+  border-radius: 20px;
 }
 
 .labeling__img-link {
@@ -55,28 +56,31 @@
   margin-bottom: 30px;
 }
 
-.set__item {
+.set__label {
   display: inline-block;
   border-radius: 5px;
+  margin: 0;
   margin-bottom: 4px;
   background-color: rgb(255, 255, 255);
-}
-
-.set__item-text {
-  display: block;
-  margin: 0;
+  cursor: pointer;
   padding: 5px 8px;
   font-size: 14px;
 }
 
-.set__item:hover {
-  background-color: rgb(240, 240, 240);
-  cursor: pointer;
+.set__input {
+  visibility: hidden;
+  margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
 }
 
-.set__item:active {
+.set__label:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.set__input:checked + .set__label {
   background-color: rgb(255, 230, 230);
-  cursor: pointer;
 }
 
 .set__submit {

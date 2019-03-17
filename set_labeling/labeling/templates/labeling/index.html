@@ -18,23 +18,24 @@
       <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">
       <p class = "labeling__img-link">{{ photo }}</p>
     </div>
-    <div class="sets">
+    <form class="sets">
       <ul class="sets__list">
         {% for key, set in sets.items %}
         <li class="set">
           <p class="set__title">{{ key }}</p>
           <ul class="set__items">
             {% for item in set %}
-            <li class="set__item">
-              <p class="set__item-text">{{ item }}</p>
-            </li>
+              <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}">
+              <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
+                {{ item }}
+              </label>
             {% endfor %}
           </ul>
         </li>
         {% endfor %}
       </ul>
       <button class="set__submit">Done ➜</button>
-    </div>
+    </form>
   </div>
 </body>
 
