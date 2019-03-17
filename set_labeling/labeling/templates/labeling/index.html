@@ -18,14 +18,16 @@
       <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">
       <p class = "labeling__img-link">{{ photo }}</p>
     </div>
-    <form class="sets">
+    <form action="?id_photo={{ photo_num|add:1 }}" class="sets" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="photo-url" value="{{ photo }}">
       <ul class="sets__list">
         {% for key, set in sets.items %}
         <li class="set">
           <p class="set__title">{{ key }}</p>
           <ul class="set__items">
             {% for item in set %}
-              <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}">
+              <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
               <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
                 {{ item }}
               </label>
@@ -34,7 +36,7 @@
         </li>
         {% endfor %}
       </ul>
-      <button class="set__submit">Done ➜</button>
+      <input type="submit" class="set__submit" value="Done ➜" name="save-next">
     </form>
   </div>
 </body>
