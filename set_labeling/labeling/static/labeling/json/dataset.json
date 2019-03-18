@@ -78,27 +78,6 @@
             "volume": "1"
         },
         {
-            "url": "labeling/img/9.jpg",
-            "frisure": "2",
-            "couleur": "3",
-            "longeur": "0",
-            "volume": "2"
-        },
-        {
-            "url": "labeling/img/14.jpg",
-            "frisure": "0",
-            "couleur": "3",
-            "longeur": "0",
-            "volume": "2"
-        },
-        {
-            "url": "labeling/img/28.jpg",
-            "frisure": "0",
-            "couleur": "0",
-            "longeur": "2",
-            "volume": "1"
-        },
-        {
             "url": "labeling/img/29.jpg",
             "frisure": "0",
             "couleur": "0",
@@ -139,13 +118,6 @@
             "couleur": "0",
             "longeur": "0",
             "volume": "1"
-        },
-        {
-            "url": "labeling/img/8.jpg",
-            "frisure": "0",
-            "couleur": "1",
-            "longeur": "1",
-            "volume": "0"
         },
         {
             "url": "labeling/img/16.jpg",
@@ -229,6 +201,34 @@
             "frisure": "3",
             "couleur": "2",
             "longeur": "0",
+            "volume": "1"
+        },
+        {
+            "url": "labeling/img/8.jpg",
+            "frisure": "0",
+            "couleur": "1",
+            "longeur": "1",
+            "volume": "0"
+        },
+        {
+            "url": "labeling/img/9.jpg",
+            "frisure": "2",
+            "couleur": "3",
+            "longeur": "0",
+            "volume": "2"
+        },
+        {
+            "url": "labeling/img/14.jpg",
+            "frisure": "0",
+            "couleur": "3",
+            "longeur": "0",
+            "volume": "2"
+        },
+        {
+            "url": "labeling/img/28.jpg",
+            "frisure": "1",
+            "couleur": "0",
+            "longeur": "2",
             "volume": "1"
         }
     ]

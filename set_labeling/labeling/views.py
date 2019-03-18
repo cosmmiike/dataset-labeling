@@ -9,39 +9,30 @@ def labeling_view(request):
         __file__)) + '/static/labeling/img'
     photos = [i for i in os.listdir(img_dir) if i.endswith('.jpg')]
 
-    sets = {
-        'frisure': ['lisses', 'ondulés', 'bouclés', 'frisés'],
-        'couleur': ['blonde', 'noir', 'brun', 'châtain', 'roux', 'gris'],
-        'longeur': ['longues', 'mi-longues', 'courts', 'extra-courts'],
-        'volume': ['faibles', 'normaux', 'volumineux'],
-    }
-
-    dataset_dir = os.path.dirname(os.path.abspath(
-        __file__)) + '/static/labeling/json/'
-
-    with open(dataset_dir + 'dataset.json') as json_file:
+    json_dir = os.path.dirname(os.path.abspath(__file__)) + '/static/labeling/json/'
+    with open(json_dir + 'sets.json') as json_file:
+        sets = json.load(json_file)
+    sets_num = len(sets)
+    set_titles = list(sets.keys())
+    print(set_titles)
+    with open(json_dir + 'dataset.json') as json_file:
         data = json.load(json_file)
 
     if request.POST:
-        if request.POST.get('photo-url') and\
-           request.POST.get('frisure-radio') and\
-           request.POST.get('couleur-radio') and\
-           request.POST.get('longeur-radio') and\
-           request.POST.get('volume-radio'):
-            output = {
-                'url': request.POST.get('photo-url'),
-                'frisure': request.POST.get('frisure-radio'),
-                'couleur': request.POST.get('couleur-radio'),
-                'longeur': request.POST.get('longeur-radio'),
-                'volume': request.POST.get('volume-radio'),
-            }
+        output = dict()
+        output['url'] = request.POST.get('photo-url')
+        for i in range(sets_num):
+            output[set_titles[i]] = request.POST.get(set_titles[i] + '-radio')
+
+        if None not in output.values():
+            print(output)
 
             img_data = next((item for item in data['data'] if item['url'] == output['url']), None)
             if img_data:
                 data['data'][:] = [d for d in data['data'] if d.get('url') != img_data['url']]
 
             data['data'].append(output)
-            with open(dataset_dir + 'dataset.json', 'w') as outfile:
+            with open(json_dir + 'dataset.json', 'w') as outfile:
                 json.dump(data, outfile, indent=4)
 
     img_num = 0

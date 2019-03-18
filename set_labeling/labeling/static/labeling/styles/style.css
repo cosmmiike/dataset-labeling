@@ -124,11 +124,12 @@
   background-color: rgb(255, 115, 115);
   outline: none;
   cursor: pointer;
-  box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.1);
+  box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.15);
 }
 
 .set__submit:active {
   background-color: rgb(255, 140, 140);
+  box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.3);
   outline: none;
 }
 

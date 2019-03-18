@@ -1,0 +1,6 @@
+{
+  "frisure": ["lisses", "ondulés", "bouclés", "frisés"],
+  "couleur": ["blonde", "noir", "brun", "châtain", "roux", "gris"],
+  "longeur": ["longues", "mi-longues", "courts", "extra-courts"],
+  "volume": ["faibles", "normaux", "volumineux"]
+}
