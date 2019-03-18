@@ -1,4 +1,5 @@
 {% load static %}
+{% load labeling_extras %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,12 +27,27 @@
         <li class="set">
           <p class="set__title">{{ key }}</p>
           <ul class="set__items">
+            {% if img_data == None %}
+              {% for item in set %}
+                <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
+                <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
+                  {{ item }}
+                </label>
+              {% endfor %}
+            {% else %}
             {% for item in set %}
-              <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
+              {% with data_key=img_data|get_item:key %}
+                {% if forloop.counter0 == data_key|to_int %}
+                  <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" checked>
+                {% else %}
+                  <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
+                {% endif %}
+              {% endwith %}
               <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
                 {{ item }}
               </label>
             {% endfor %}
+            {%  endif %}
           </ul>
         </li>
         {% endfor %}

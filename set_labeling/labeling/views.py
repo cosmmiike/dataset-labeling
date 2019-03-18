@@ -12,17 +12,17 @@ def labeling_view(request):
         'frisure': ['lisses', 'ondulés', 'bouclés', 'frisés'],
         'couleur': ['noir', 'blonde', 'brun', 'châtain', 'roux', 'gris'],
         'longeur': ['longues', 'mi-longues', 'courts', 'extra-courts'],
-        'volume': ['volumineux', 'lâches', 'normaux'],
-
+        'volume': ['volumineux', 'normaux', 'faibles'],
     }
 
+    dataset_dir = os.path.dirname(os.path.abspath(
+        __file__)) + '/static/labeling/json/'
+
+    with open(dataset_dir + 'dataset.json') as json_file:
+        data = json.load(json_file)
+
     if request.GET.get('id_photo') is None:
-        context = {
-            'sets': sets,
-            'photo_num': 0,
-            'photo': 'labeling/img/' + photos[0],
-        }
-        return render(request, 'labeling/index.html', context)
+        img_num = 0
 
     else:
         img_num = int(request.GET.get('id_photo'))
@@ -44,21 +44,22 @@ def labeling_view(request):
                 'volume': request.POST.get('volume-radio'),
             }
 
-            dataset_dir = os.path.dirname(os.path.abspath(
-                __file__)) + '/static/labeling/json/'
+            img_data = next((item for item in data['data'] if item['url'] == output['url']), None)
+            if img_data:
+                data['data'][:] = [d for d in data['data'] if d.get('url') != img_data['url']]
 
-            with open(dataset_dir + 'dataset.json') as json_file:
-                data = json.load(json_file)
             data['data'].append(output)
-
             with open(dataset_dir + 'dataset.json', 'w') as outfile:
                 json.dump(data, outfile, indent=4)
 
-        context = {
-            'sets': sets,
-            'photo_num': img_num,
-            'photo': 'labeling/img/' + photos[img_num],
-        }
+    context = {
+        'sets': sets,
+        'photo_num': img_num,
+        'photo': 'labeling/img/' + photos[img_num],
+    }
 
+    img_data = next((item for item in data['data'] if item['url'] == context['photo']), None)
+    if img_data:
+        context['img_data'] = img_data
 
-        return render(request, 'labeling/index.html', context)
+    return render(request, 'labeling/index.html', context)
