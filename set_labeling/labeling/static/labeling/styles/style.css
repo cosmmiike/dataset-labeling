@@ -40,6 +40,10 @@
   padding: 0;
 }
 
+.sets__list {
+  margin-bottom: 50px;
+}
+
 .set {
   display: block;
 }
@@ -84,7 +88,7 @@
 }
 
 .set__submit {
-  margin: 0;
+  margin-right: 100px;
   padding: 6px 12px;
   background-color: rgb(255, 100, 100);
   border: none;
@@ -103,4 +107,29 @@
 .set__submit:focus{
   background-color: rgb(255, 140, 140);
   outline: none;
+}
+
+.set__switch {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.set__switch-link {
+  padding: 6px 12px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(150, 150, 150);
+  text-decoration: none;
+}
+
+.set__switch-link:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.set__switch-link:active {
+  background-color: rgb(255, 230, 230);
 }

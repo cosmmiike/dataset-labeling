@@ -10,9 +10,9 @@ def labeling_view(request):
 
     sets = {
         'frisure': ['lisses', 'ondulés', 'bouclés', 'frisés'],
-        'couleur': ['noir', 'blonde', 'brun', 'châtain', 'roux', 'gris'],
+        'couleur': ['blonde', 'noir', 'brun', 'châtain', 'roux', 'gris'],
         'longeur': ['longues', 'mi-longues', 'courts', 'extra-courts'],
-        'volume': ['volumineux', 'normaux', 'faibles'],
+        'volume': ['faibles', 'normaux', 'volumineux'],
     }
 
     dataset_dir = os.path.dirname(os.path.abspath(
@@ -21,36 +21,31 @@ def labeling_view(request):
     with open(dataset_dir + 'dataset.json') as json_file:
         data = json.load(json_file)
 
-    if request.GET.get('id_photo') is None:
-        img_num = 0
+    if request.POST.get('photo-url') and\
+       request.POST.get('frisure-radio') and\
+       request.POST.get('couleur-radio') and\
+       request.POST.get('longeur-radio') and\
+       request.POST.get('volume-radio'):
+        output = {
+            'url': request.POST.get('photo-url'),
+            'frisure': request.POST.get('frisure-radio'),
+            'couleur': request.POST.get('couleur-radio'),
+            'longeur': request.POST.get('longeur-radio'),
+            'volume': request.POST.get('volume-radio'),
+        }
 
-    else:
-        img_num = int(request.GET.get('id_photo'))
-        if img_num > len(photos) - 1:
-            img_num = 0
+        img_data = next((item for item in data['data'] if item['url'] == output['url']), None)
+        if img_data:
+            data['data'][:] = [d for d in data['data'] if d.get('url') != img_data['url']]
 
-        elif request.POST.get('frisure-radio') is None or\
-             request.POST.get('couleur-radio') is None or\
-             request.POST.get('longeur-radio') is None or\
-             request.POST.get('volume-radio') is None:
-            img_num -= 1
+        data['data'].append(output)
+        with open(dataset_dir + 'dataset.json', 'w') as outfile:
+            json.dump(data, outfile, indent=4)
 
-        else:
-            output = {
-                'url': request.POST.get('photo-url'),
-                'frisure': request.POST.get('frisure-radio'),
-                'couleur': request.POST.get('couleur-radio'),
-                'longeur': request.POST.get('longeur-radio'),
-                'volume': request.POST.get('volume-radio'),
-            }
-
-            img_data = next((item for item in data['data'] if item['url'] == output['url']), None)
-            if img_data:
-                data['data'][:] = [d for d in data['data'] if d.get('url') != img_data['url']]
-
-            data['data'].append(output)
-            with open(dataset_dir + 'dataset.json', 'w') as outfile:
-                json.dump(data, outfile, indent=4)
+    img_num = 0
+    next_img = request.GET.get('id_photo')
+    if next_img and int(next_img) < len(photos) - 1:
+        img_num = int(next_img)
 
     context = {
         'sets': sets,

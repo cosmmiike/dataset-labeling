@@ -52,7 +52,9 @@
         </li>
         {% endfor %}
       </ul>
-      <input type="submit" class="set__submit" value="Done ➜" name="save-next">
+      <input class="set__submit" type="submit" value="Done ➜" name="save-next">
+      <button class="set__switch" type="button" name="prev"><a class="set__switch-link" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a></button>
+      <button class="set__switch" type="button" name="next"><a class="set__switch-link" href="?id_photo={{ photo_num|add:1 }}">Next →</a></button>
     </form>
   </div>
 </body>
