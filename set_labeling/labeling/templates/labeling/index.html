@@ -29,8 +29,9 @@
           <ul class="set__items">
             {% if img_data == None %}
               {% for item in set %}
-                <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
+                <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" required>
                 <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
+                  <span class="set__label-num">{{ forloop.counter }}</span>
                   {{ item }}
                 </label>
               {% endfor %}
@@ -38,12 +39,13 @@
             {% for item in set %}
               {% with data_key=img_data|get_item:key %}
                 {% if forloop.counter0 == data_key|to_int %}
-                  <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" checked>
+                  <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" checked required>
                 {% else %}
                   <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
                 {% endif %}
               {% endwith %}
               <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
+                <span class="set__label-num">{{ forloop.counter }}</span>
                 {{ item }}
               </label>
             {% endfor %}
@@ -52,11 +54,21 @@
         </li>
         {% endfor %}
       </ul>
-      <input class="set__submit" type="submit" value="Done ➜" name="save-next">
-      <button class="set__switch" type="button" name="prev"><a class="set__switch-link" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a></button>
-      <button class="set__switch" type="button" name="next"><a class="set__switch-link" href="?id_photo={{ photo_num|add:1 }}">Next →</a></button>
+      <input class="set__submit" type="submit" value="Save & Go to the next photo" name="save-next">
+      <a class="set__switch-link" id="switch-prev" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a>
+      <a class="set__switch-link" id="switch-next" href="?id_photo={{ photo_num|add:1 }}">Next →</a>
     </form>
   </div>
+
+  <script type="text/javascript">
+    document.onkeyup = function(e) {
+      if (e.altKey && e.which == 37) {
+        document.location.href = "?id_photo={{ photo_num|add:-1 }}";
+      } else if (e.altKey && e.which == 39) {
+        document.location.href = "?id_photo={{ photo_num|add:1 }}";
+      }
+    };
+  </script>
 </body>
 
 </html>

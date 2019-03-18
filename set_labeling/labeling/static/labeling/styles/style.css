@@ -24,7 +24,7 @@
 
 .labeling__img-link {
   font-size: 14px;
-  color: rgb(200, 200, 200);
+  color: rgb(150, 150, 150);
 }
 
 .sets {
@@ -65,26 +65,47 @@
   border-radius: 5px;
   margin: 0;
   margin-bottom: 4px;
+  margin-right: 5px;
   background-color: rgb(255, 255, 255);
   cursor: pointer;
   padding: 5px 8px;
+  padding-left: 0;
   font-size: 14px;
 }
 
+.set__label-num {
+  border-radius: 5px;
+  background-color: rgb(245, 245, 245);
+  padding: 5px 8px;
+}
+
 .set__input {
-  visibility: hidden;
+  opacity: 0;
   margin: 0;
   padding: 0;
   width: 0;
   height: 0;
 }
 
-.set__label:hover {
+.set__label:hover,
+.set__label:focus {
   background-color: rgb(240, 240, 240);
 }
 
-.set__input:checked + .set__label {
+.set__label:hover .set__label-num,
+.set__label:focus .set__label-num {
+  background-color: rgb(230, 230, 230);
+}
+
+.set__input:checked + .set__label,
+.set__input:focus + .set__label,
+.set__label:active {
   background-color: rgb(255, 230, 230);
+}
+
+.set__input:checked + .set__label .set__label-num,
+.set__input:focus + .set__label .set__label-num {
+  background-color: rgb(255, 200, 200);
 }
 
 .set__submit {
@@ -98,21 +119,17 @@
   color: rgb(255, 255, 255);
 }
 
-.set__submit:hover{
+.set__submit:hover,
+.set__submit:focus {
   background-color: rgb(255, 115, 115);
+  outline: none;
   cursor: pointer;
+  box-shadow: 0 0 10px 5px rgba(255, 0, 0, 0.1);
 }
 
-.set__submit:active,
-.set__submit:focus{
+.set__submit:active {
   background-color: rgb(255, 140, 140);
   outline: none;
-}
-
-.set__switch {
-  border: none;
-  margin: 0;
-  padding: 0;
 }
 
 .set__switch-link {
@@ -126,8 +143,10 @@
   text-decoration: none;
 }
 
-.set__switch-link:hover {
+.set__switch-link:hover,
+.set__switch-link:focus {
   background-color: rgb(240, 240, 240);
+  outline: none;
 }
 
 .set__switch-link:active {
