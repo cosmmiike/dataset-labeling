@@ -13,16 +13,22 @@
   margin-bottom: 60px;
 }
 
-.labeling__photo {
+.labeling__container {
   float: left;
-  margin-right: 50px;
+  margin-right: 30px;
+  width: 350px;
+}
+
+.labeling__photo {
+  position: fixed;
 }
 
 .labeling__img {
+  width: 350px;
   border-radius: 20px;
 }
 
-.labeling__img-link {
+.labeling__url {
   font-size: 14px;
   color: rgb(150, 150, 150);
 }
@@ -41,16 +47,17 @@
 }
 
 .sets__list {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .set {
   display: block;
   padding: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  font-size: 0;
 }
 
-.set.focused {
+.set--focused {
   background-color: rgb(245, 245, 245);
   border-radius: 10px;
 }
@@ -65,12 +72,13 @@
 
 .set__item {
   margin: 0;
+  margin-right: 3px;
   padding: 0;
   display: inline-block;
 }
 
 .set__label {
-  display: inline-block;
+  display: block;
   border-radius: 5px;
   margin: 0;
   margin-bottom: 4px;
@@ -80,6 +88,7 @@
   padding: 5px 8px;
   padding-left: 0;
   font-size: 14px;
+  text-transform: lowercase;
 }
 
 .set__label-num {
@@ -88,7 +97,7 @@
   padding: 5px 8px;
 }
 
-.set.focused .set__label-num {
+.set--focused .set__label-num {
   background-color: rgb(235, 235, 235);
 }
 
@@ -104,7 +113,7 @@
   background-color: rgb(240, 240, 240);
 }
 
-.set.focused .set__label:hover {
+.set--focused .set__label:hover {
   background-color: rgb(235, 235, 235);
 }
 
@@ -125,7 +134,9 @@
 }
 
 .set__submit {
-  margin-right: 100px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 50px;
   padding: 6px 12px;
   background-color: rgb(255, 100, 100);
   border: none;
@@ -149,7 +160,12 @@
   outline: none;
 }
 
+.set__switch {
+  float: right;
+}
+
 .set__switch-link {
+  display: inline-block;
   padding: 6px 12px;
   background-color: rgb(255, 255, 255);
   border: none;

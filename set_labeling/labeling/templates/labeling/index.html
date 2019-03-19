@@ -15,11 +15,17 @@
 <body>
   <div class="labeling">
     <h1 class="labeling__title">Dataset Labeling</h1>
-    <div class = "labeling__photo">
-      <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">
-      <p class = "labeling__img-link">{{ photo }}</p>
+    <div class="labeling__container">
+      <div class = "labeling__photo">
+        <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">
+        <div class="labeling__img-url">
+          <p class = "labeling__url">{{ photo }}</p>
+          <a href="" class="labeling__copy-url">Copy image url</a>
+        </div>
+      </div>
+      <p class="fix"></p>
     </div>
-    <form action="?id_photo={{ photo_num|add:1 }}" class="sets" method="POST">
+    <form class="sets" action="?id_photo={{ photo_num|add:1 }}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="photo-url" value="{{ photo }}">
       <ul class="sets__list">
@@ -44,7 +50,7 @@
                   {% if forloop.counter0 == data_key|to_int %}
                     <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" checked required>
                   {% else %}
-                    <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
+                    <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" required>
                   {% endif %}
                 {% endwith %}
                 <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
@@ -58,66 +64,91 @@
         </li>
         {% endfor %}
       </ul>
-      <input class="set__submit" type="submit" value="Save & Go to the next photo" name="save-next">
-      <a class="set__switch-link" id="switch-prev" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a>
-      <a class="set__switch-link" id="switch-next" href="?id_photo={{ photo_num|add:1 }}">Next →</a>
+      <input class="set__submit" type="submit" value="Save & Go to the next picture" name="save-next">
+      <div class="set__switch">
+        <a class="set__switch-link" id="switch-prev" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a>
+        <a class="set__switch-link" id="switch-next" href="?id_photo={{ photo_num|add:1 }}">Next →</a>
+      </div>
     </form>
   </div>
 
   <script type="text/javascript" src="{% static "labeling/scripts/jquery-3.3.1.min.js" %}"></script>
   <script type="text/javascript">
-
     $(".set__items").focusin(function() {
-      $(this).parent().addClass("focused");
+      $(this).parent().addClass("set--focused");
     });
 
     $(".set__items").focusout(function() {
-      $(this).parent().removeClass("focused");
+      $(this).parent().removeClass("set--focused");
     });
 
     if (!$('input[type="radio"]:checked')[0]) {
-      $('input[type="radio"]').eq(0).attr("checked", "checked");
+      $('input[type="radio"]').eq(0).prop("checked", true);
     }
 
     $('input[type="radio"]:checked')[0].focus();
 
-    $(document).keydown(function( event ) {
-      if ( event.altKey && event.which == 37 ) {
+    $(document).keydown(function(event) {
+      if (event.altKey && event.which == 37) {
         event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:-1 }}";
       }
 
-      if ( event.altKey && event.which == 39 ) {
+      if (event.altKey && event.which == 39) {
         event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:1 }}";
       }
 
-      if ( event.which == 38 ) {
+      if ( event.which == 38 || event.which == 40 ) {
         event.preventDefault();
-        var idFocusedSet = Number($(".set.focused")[0].getAttribute('id').replace(/\D/g, ''));
-        var idNextFocusedSet = idFocusedSet - 1;
-        if (idNextFocusedSet < 1) {
-          idNextFocusedSet = {{ sets|length }};
+        var focusedSet = $(".set--focused")[0];
+        if (!focusedSet) {
+          if (event.which == 38) {
+            var idNextFocusedSet = {{ sets|length }};
+          } else {
+            var idNextFocusedSet = 1;
+          }
+        } else {
+          var idFocusedSet = Number(focusedSet.getAttribute('id').replace(/\D/g, ''));
+          if (event.which == 38) {
+            var idNextFocusedSet = idFocusedSet - 1;
+          } else {
+            var idNextFocusedSet = idFocusedSet + 1;
+          }
+          if (idNextFocusedSet > {{ sets|length }}) {
+            idNextFocusedSet = 1;
+          } else if (idNextFocusedSet < 1) {
+            idNextFocusedSet = {{ sets|length }};
+          }
         }
+
         var nextFocusedSet = $("#set-" + idNextFocusedSet)[0];
         if (!$('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0]) {
-          $('input[type="radio"]', "#set-" + idNextFocusedSet).eq(0).attr("checked", "checked");
+          $('input[type="radio"]', "#set-" + idNextFocusedSet).eq(0).prop("checked", true);
         }
         $('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0].focus();
       }
 
-      if ( event.which == 40 ) {
+      if ( event.which >= 49 && event.which <= 57  ) {
         event.preventDefault();
-        var idFocusedSet = Number($(".set.focused")[0].getAttribute('id').replace(/\D/g, ''));
-        var idNextFocusedSet = idFocusedSet + 1;
-        if (idNextFocusedSet > {{ sets|length }}) {
-          idNextFocusedSet = 1;
+        var keycode = event.which;
+        var keysymbol = Number(String.fromCharCode(keycode));
+        var idFocusedSet = Number($(".set--focused")[0].getAttribute('id').replace(/\D/g, ''));
+        if (keysymbol <= $(".set--focused .set__items .set__item").length) {
+          $('input[type="radio"]:checked', "#set-" + idFocusedSet).eq(0).prop("checked", false);
+          $('input[type="radio"]', "#set-" + idFocusedSet).eq(keysymbol - 1).prop("checked", true);
+          $('input[type="radio"]:checked', "#set-" + idFocusedSet)[0].focus();
+
+          var idNextFocusedSet = idFocusedSet + 1;
+          if (idNextFocusedSet > {{ sets|length }}) {
+            idNextFocusedSet = 1;
+          }
+          var nextFocusedSet = $("#set-" + idNextFocusedSet)[0];
+          if (!$('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0]) {
+            $('input[type="radio"]', "#set-" + idNextFocusedSet).eq(0).prop("checked", true);
+          }
+          $('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0].focus();
         }
-        var nextFocusedSet = $("#set-" + idNextFocusedSet)[0];
-        if (!$('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0]) {
-          $('input[type="radio"]', "#set-" + idNextFocusedSet).eq(0).attr("checked", "checked");
-        }
-        $('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0].focus();
       }
     });
   </script>

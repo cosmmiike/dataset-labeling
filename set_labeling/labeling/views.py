@@ -35,9 +35,9 @@ def labeling_view(request):
 
     img_num = 0
     next_img = request.GET.get('id_photo')
-    if next_img and int(next_img) < len(photos) - 1:
+    if next_img and int(next_img) < len(photos):
         if int(next_img) < 0:
-            img_num = 0
+            img_num = len(photos) - 1
         else:
             img_num = int(next_img)
 
