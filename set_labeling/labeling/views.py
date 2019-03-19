@@ -14,7 +14,6 @@ def labeling_view(request):
         sets = json.load(json_file)
     sets_num = len(sets)
     set_titles = list(sets.keys())
-    print(set_titles)
     with open(json_dir + 'dataset.json') as json_file:
         data = json.load(json_file)
 
@@ -25,7 +24,6 @@ def labeling_view(request):
             output[set_titles[i]] = request.POST.get(set_titles[i] + '-radio')
 
         if None not in output.values():
-            print(output)
 
             img_data = next((item for item in data['data'] if item['url'] == output['url']), None)
             if img_data:

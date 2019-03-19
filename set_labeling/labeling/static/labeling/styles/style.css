@@ -46,6 +46,13 @@
 
 .set {
   display: block;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.set.focused {
+  background-color: rgb(245, 245, 245);
+  border-radius: 10px;
 }
 
 .set__title {
@@ -56,8 +63,10 @@
   margin-bottom: 10px;
 }
 
-.set__items {
-  margin-bottom: 30px;
+.set__item {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
 }
 
 .set__label {
@@ -66,7 +75,7 @@
   margin: 0;
   margin-bottom: 4px;
   margin-right: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: none;
   cursor: pointer;
   padding: 5px 8px;
   padding-left: 0;
@@ -79,6 +88,10 @@
   padding: 5px 8px;
 }
 
+.set.focused .set__label-num {
+  background-color: rgb(235, 235, 235);
+}
+
 .set__input {
   opacity: 0;
   margin: 0;
@@ -87,9 +100,12 @@
   height: 0;
 }
 
-.set__label:hover,
-.set__label:focus {
+.set__label:hover {
   background-color: rgb(240, 240, 240);
+}
+
+.set.focused .set__label:hover {
+  background-color: rgb(235, 235, 235);
 }
 
 .set__label:hover .set__label-num,

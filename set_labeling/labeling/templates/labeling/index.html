@@ -24,30 +24,34 @@
       <input type="hidden" name="photo-url" value="{{ photo }}">
       <ul class="sets__list">
         {% for key, set in sets.items %}
-        <li class="set">
+        <li class="set" id="set-{{ forloop.counter }}">
           <p class="set__title">{{ key }}</p>
           <ul class="set__items">
             {% if img_data == None %}
               {% for item in set %}
-                <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" required>
+                <li class="set__item">
+                  <input class="set__input" type="radio" id="{{ key }}-radio-{{ forloop.counter }}" name="{{ key }}-radio" value="{{ forloop.counter0 }}" required>
+                  <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
+                    <span class="set__label-num">{{ forloop.counter }}</span>
+                    {{ item }}
+                  </label>
+                </li>
+              {% endfor %}
+            {% else %}
+            {% for item in set %}
+              <li class="set__item">
+                {% with data_key=img_data|get_item:key %}
+                  {% if forloop.counter0 == data_key|to_int %}
+                    <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" checked required>
+                  {% else %}
+                    <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
+                  {% endif %}
+                {% endwith %}
                 <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
                   <span class="set__label-num">{{ forloop.counter }}</span>
                   {{ item }}
                 </label>
-              {% endfor %}
-            {% else %}
-            {% for item in set %}
-              {% with data_key=img_data|get_item:key %}
-                {% if forloop.counter0 == data_key|to_int %}
-                  <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}" checked required>
-                {% else %}
-                  <input class="set__input" type="radio" id="{{ key|add:"-radio-" }}{{ forloop.counter }}" name="{{ key|add:"-radio" }}" value="{{ forloop.counter0 }}">
-                {% endif %}
-              {% endwith %}
-              <label class="set__label" for="{{ key|add:"-radio-" }}{{ forloop.counter }}">
-                <span class="set__label-num">{{ forloop.counter }}</span>
-                {{ item }}
-              </label>
+              </li>
             {% endfor %}
             {%  endif %}
           </ul>
@@ -60,14 +64,62 @@
     </form>
   </div>
 
+  <script type="text/javascript" src="{% static "labeling/scripts/jquery-3.3.1.min.js" %}"></script>
   <script type="text/javascript">
-    document.onkeyup = function(e) {
-      if (e.altKey && e.which == 37) {
+
+    $(".set__items").focusin(function() {
+      $(this).parent().addClass("focused");
+    });
+
+    $(".set__items").focusout(function() {
+      $(this).parent().removeClass("focused");
+    });
+
+    if (!$('input[type="radio"]:checked')[0]) {
+      $('input[type="radio"]').eq(0).attr("checked", "checked");
+    }
+
+    $('input[type="radio"]:checked')[0].focus();
+
+    $(document).keydown(function( event ) {
+      if ( event.altKey && event.which == 37 ) {
+        event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:-1 }}";
-      } else if (e.altKey && e.which == 39) {
+      }
+
+      if ( event.altKey && event.which == 39 ) {
+        event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:1 }}";
       }
-    };
+
+      if ( event.which == 38 ) {
+        event.preventDefault();
+        var idFocusedSet = Number($(".set.focused")[0].getAttribute('id').replace(/\D/g, ''));
+        var idNextFocusedSet = idFocusedSet - 1;
+        if (idNextFocusedSet < 1) {
+          idNextFocusedSet = {{ sets|length }};
+        }
+        var nextFocusedSet = $("#set-" + idNextFocusedSet)[0];
+        if (!$('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0]) {
+          $('input[type="radio"]', "#set-" + idNextFocusedSet).eq(0).attr("checked", "checked");
+        }
+        $('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0].focus();
+      }
+
+      if ( event.which == 40 ) {
+        event.preventDefault();
+        var idFocusedSet = Number($(".set.focused")[0].getAttribute('id').replace(/\D/g, ''));
+        var idNextFocusedSet = idFocusedSet + 1;
+        if (idNextFocusedSet > {{ sets|length }}) {
+          idNextFocusedSet = 1;
+        }
+        var nextFocusedSet = $("#set-" + idNextFocusedSet)[0];
+        if (!$('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0]) {
+          $('input[type="radio"]', "#set-" + idNextFocusedSet).eq(0).attr("checked", "checked");
+        }
+        $('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0].focus();
+      }
+    });
   </script>
 </body>
 
