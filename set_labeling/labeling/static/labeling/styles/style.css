@@ -21,16 +21,61 @@
 
 .labeling__photo {
   position: fixed;
+  overflow-y: scroll;
 }
 
 .labeling__img {
   width: 350px;
   border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.labeling__img-url{
+  width: 350px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: rgb(245, 245, 245);
+  color: rgb(150, 150, 150);
 }
 
 .labeling__url {
+  float: right;
+  width: 270px;
+  padding: 6px 12px;
+  padding-right: 0;
+  border: none;
+  border-radius: 6px;
   font-size: 14px;
+  background-color: rgb(245, 245, 245);
   color: rgb(150, 150, 150);
+}
+
+.labeling__url:focus {
+  outline: none;
+  background-color: rgb(230, 230, 230);
+}
+
+.labeling__copy-url {
+  padding: 6px 12px;
+  background-color: rgb(100, 180, 80);
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+}
+
+.labeling__copy-url:hover,
+.labeling__copy-url:focus {
+  background-color: rgb(120, 180, 100);
+  outline: none;
+  cursor: pointer;
+}
+
+.labeling__copy-url:active {
+  background-color: rgb(140, 180, 120);
+  outline: none;
 }
 
 .sets {
