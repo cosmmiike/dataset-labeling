@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="{% static "labeling/styles/style.css" %}">
+  <link rel="stylesheet" href="{% static "labeling/styles/styler.css" %}">
   <title>Dataset Labeling</title>
 </head>
 
@@ -88,7 +88,7 @@
 
     $('input[type="radio"]:checked')[0].focus();
 
-    $(document).keydown(function(event) {
+    $(document).keyup(function(event) {
       if (event.altKey && event.which == 37) {
         event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:-1 }}";
@@ -151,7 +151,7 @@
         }
       }
 
-      if ( event.which == 67 ) {
+      if ( event.which == 67 && !event.altKey && !event.ctrlKey) {
         event.preventDefault();
         copyToClipboard(document.getElementById("copyTarget"));
         console.log(document.getElementById("copyTarget"));
