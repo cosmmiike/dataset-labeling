@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="{% static "labeling/styles/styler.css" %}">
+  <link rel="stylesheet" href="{% static "labeling/styles/style.css" %}">
   <title>Dataset Labeling</title>
 </head>
 
@@ -88,7 +88,7 @@
 
     $('input[type="radio"]:checked')[0].focus();
 
-    $(document).keyup(function(event) {
+    $(document).keydown(function(event) {
       if (event.altKey && event.which == 37) {
         event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:-1 }}";
@@ -150,13 +150,14 @@
           $('input[type="radio"]:checked', "#set-" + idNextFocusedSet)[0].focus();
         }
       }
+    });
 
-      if ( event.which == 67 && !event.altKey && !event.ctrlKey) {
+    $(document).keyup(function(event) {
+      if ( event.which == 67) {
         event.preventDefault();
         copyToClipboard(document.getElementById("copyTarget"));
         console.log(document.getElementById("copyTarget"));
       }
-
     });
 
     document.getElementById("copyButton").addEventListener("click", function() {
