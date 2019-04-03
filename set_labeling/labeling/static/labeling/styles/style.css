@@ -5,7 +5,6 @@
 .labeling {
   width: 900px;
   margin: 0 auto;
-  overflow: auto;
 }
 
 .labeling__title {
@@ -21,7 +20,6 @@
 
 .labeling__photo {
   position: fixed;
-  overflow-y: scroll;
 }
 
 .labeling__img {
@@ -30,7 +28,7 @@
   margin-bottom: 20px;
 }
 
-.labeling__img-url{
+.labeling__img-url {
   width: 350px;
   margin-bottom: 20px;
   border-radius: 6px;
@@ -80,7 +78,6 @@
 
 .sets {
   float: left;
-  width: 500px;
 }
 
 .sets__list,
@@ -92,7 +89,11 @@
 }
 
 .sets__list {
+  display: block;
   margin-bottom: 30px;
+  width: 500px;
+  height-max: calc(100vh - 250px);
+  overflow-y: scroll;
 }
 
 .set {
@@ -174,7 +175,8 @@
 }
 
 .set__input:checked + .set__label .set__label-num,
-.set__input:focus + .set__label .set__label-num {
+.set__input:focus + .set__label .set__label-num,
+.set__label:active .set__label-num {
   background-color: rgb(255, 200, 200);
 }
 
@@ -229,4 +231,63 @@
 
 .set__switch-link:active {
   background-color: rgb(255, 230, 230);
+}
+
+.stats {
+  width: 810px;
+  margin: 0 auto;
+}
+
+.stats__title {
+  font-size: 50px;
+  margin-bottom: 60px;
+}
+
+/*
+.stats * {
+  outline: 1px solid red;
+} */
+
+.category {
+  display: inline-block;
+  vertical-align: top;
+  width: 350px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+}
+
+.category__title {
+  text-transform: capitalize;
+}
+
+.category__classes {
+  list-style: none;
+  padding: 0;
+}
+
+.category-class__name,
+.category-class__count,
+.category-class__percentage {
+  display: inline-block;
+  margin: 0;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.category-class__name {
+  border-radius: 5px;
+  width: 100px;
+  padding: 5px 8px;
+  text-transform: lowercase;
+  background-color: rgb(240, 240, 240);
+  overflow: hidden;
+}
+
+.category-class__percentage {
+  width: 40px;
+}
+
+.category-class__count {
+  font-size: 14px;
+  color: rgb(180, 180, 180);
 }

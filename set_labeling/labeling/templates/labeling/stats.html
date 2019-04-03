@@ -1,0 +1,38 @@
+{% load static %}
+{% load labeling_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static "labeling/styles/style.css" %}">
+  <title>Dataset Statistics</title>
+</head>
+
+<body>
+  <div class="stats">
+    <h1 class="stats__title">Dataset Statistics</h1>
+    <p>min : 100 images par class</p>
+    <div class="categories">
+      {% for key, set in sets_output.items %}
+        <div class="category">
+          <h2 class="category__title">{{ key }}</h2>
+          <ul class="category__classes">
+            {% for class in set %}
+              <li class="category-class">
+                <p class="category-class__name">{{ class.class_name }}</p>
+                <p class="category-class__percentage">{% widthratio class.class_count sets_output|length 10 %}%</p>
+                <p class="category-class__count">{{ class.class_count }} images</p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>

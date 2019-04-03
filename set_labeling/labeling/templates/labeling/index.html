@@ -14,7 +14,7 @@
 
 <body>
   <div class="labeling">
-    <h1 class="labeling__title">Dataset Labeling</h1>
+    <h1 class="labeling__title">Dataset Labeling : {{ photo_num }}</h1>
     <div class="labeling__container">
       <div class = "labeling__photo">
         <div class="labeling__img-url">
@@ -91,12 +91,12 @@
     $(document).keydown(function(event) {
       if (event.altKey && event.which == 37) {
         event.preventDefault();
-        document.location.href = "?id_photo={{ photo_num|add:-1 }}";
+        $("#switch-prev")[0].focus();
       }
 
       if (event.altKey && event.which == 39) {
         event.preventDefault();
-        document.location.href = "?id_photo={{ photo_num|add:1 }}";
+        $("#switch-next")[0].focus();
       }
 
       if ( event.which == 38 || event.which == 40 ) {
@@ -153,6 +153,17 @@
     });
 
     $(document).keyup(function(event) {
+
+      if (event.altKey && event.which == 37) {
+        event.preventDefault();
+        document.location.href = "?id_photo={{ photo_num|add:-1 }}";
+      }
+
+      if (event.altKey && event.which == 39) {
+        event.preventDefault();
+        document.location.href = "?id_photo={{ photo_num|add:1 }}";
+      }
+
       if ( event.which == 67) {
         event.preventDefault();
         copyToClipboard(document.getElementById("copyTarget"));
