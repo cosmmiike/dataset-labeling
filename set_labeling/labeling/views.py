@@ -7,7 +7,7 @@ import json
 def labeling_view(request):
     img_dir = os.path.dirname(os.path.abspath(
         __file__)) + '/static/labeling/img/hair/'
-    photos = sorted([i for i in os.listdir(img_dir) if i.endswith('.jpg') or i.endswith('.jpg')])
+    photos = sorted([i for i in os.listdir(img_dir) if i.endswith('.jpg') or i.endswith('.png') or i.endswith('.jpeg')])
 
     json_dir = os.path.dirname(os.path.abspath(__file__)) + '/static/labeling/json/'
     with open(json_dir + 'sets.json') as json_file:
@@ -51,6 +51,33 @@ def labeling_view(request):
         context['img_data'] = img_data
 
     return render(request, 'labeling/index.html', context)
+
+
+def remove_view(request):
+    if request.GET:
+        img_dir = os.path.dirname(os.path.abspath(
+            __file__)) + '/static/labeling/img/hair/'
+        photos = sorted([i for i in os.listdir(img_dir) if i.endswith('.jpg') or i.endswith('.png') or i.endswith('.jpeg')])
+
+        this_img = int(request.GET.get('id_photo'))
+        json_dir = os.path.dirname(os.path.abspath(__file__)) + '/static/labeling/json/'
+        with open(json_dir + 'dataset.json') as json_file:
+            data = json.load(json_file)
+
+        img_data = next((item for item in data['data'] if item['url'] == 'labeling/img/hair/' + photos[this_img]), None)
+        if img_data:
+            data['data'][:] = [d for d in data['data'] if d.get('url') != img_data['url']]
+            with open(json_dir + 'dataset.json', 'w') as outfile:
+                json.dump(data, outfile, indent=4)
+
+        removed_dir = os.path.exists(img_dir + '../removed/')
+        if not removed_dir:
+            os.makedirs(img_dir + '../removed/')
+
+        os.rename(img_dir + photos[this_img], img_dir + '../removed/' + photos[this_img])
+        # os.remove(img_dir + photos[this_img])
+        return HttpResponseRedirect('/?id_photo=' + str(this_img))
+    return HttpResponseRedirect('/')
 
 
 def stats_view(request):

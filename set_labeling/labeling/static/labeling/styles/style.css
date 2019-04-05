@@ -39,7 +39,7 @@
 
 .labeling__url {
   float: right;
-  width: 270px;
+  width: 240px;
   padding: 6px 12px;
   padding-right: 0;
   border: none;
@@ -74,6 +74,21 @@
 .labeling__copy-url:active {
   background-color: rgb(140, 180, 120);
   outline: none;
+}
+
+.labeling__remove {
+  float: right;
+  padding: 6px 12px;
+  background-color: rgb(220, 220, 220);
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.labeling__remove:hover,
+.labeling__remove:active {
+  background-color: rgb(210, 210, 210);
 }
 
 .sets {
@@ -242,11 +257,6 @@
   font-size: 50px;
   margin-bottom: 60px;
 }
-
-/*
-.stats * {
-  outline: 1px solid red;
-} */
 
 .category {
   display: inline-block;

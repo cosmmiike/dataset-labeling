@@ -1,6 +1,6 @@
 {
-  "frisure": ["lisses", "ondulés", "bouclés", "frisés"],
-  "couleur": ["blonde", "noir", "brun", "châtain", "roux", "gris", "autre"],
-  "longeur": ["longues", "mi-longues", "courts", "très courts", "très longues"],
-  "volume": ["faibles", "normaux", "volumineux"]
+  "frisure": ["lisses", "ondulés", "bouclés", "frisés", "kosa", "puchok"],
+  "couleur": ["blonde", "noir", "brun", "châtain", "roux", "gris", "ombré", "autre"],
+  "longeur": ["longues", "mi-longues", "courts", "très courts", "très longues", "impossible"],
+  "volume": ["faible", "moyen", "volumineux"]
 }

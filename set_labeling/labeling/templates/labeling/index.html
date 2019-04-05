@@ -19,6 +19,7 @@
       <div class = "labeling__photo">
         <div class="labeling__img-url">
           <button class="labeling__copy-url" id="copyButton">Copy</button>
+          <a class="labeling__remove" href="/remove/?id_photo={{ photo_num }}">R</a>
           <input class="labeling__url" id="copyTarget" type="text" value="{{ photo }}" readonly>
         </div>
         <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">
@@ -69,6 +70,7 @@
         <a class="set__switch-link" id="switch-prev" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a>
         <a class="set__switch-link" id="switch-next" href="?id_photo={{ photo_num|add:1 }}">Next →</a>
       </div>
+      <a href="/stats">Statistique</a>
     </form>
   </div>
 
@@ -162,6 +164,11 @@
       if (event.altKey && event.which == 39) {
         event.preventDefault();
         document.location.href = "?id_photo={{ photo_num|add:1 }}";
+      }
+
+      if ( event.which == 82) {
+        event.preventDefault();
+        document.location.href = "remove/?id_photo={{ photo_num }}";
       }
 
       if ( event.which == 67) {

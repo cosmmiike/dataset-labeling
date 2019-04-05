@@ -15,7 +15,7 @@
 <body>
   <div class="stats">
     <h1 class="stats__title">Dataset Statistics</h1>
-    <p>min : 100 images par class</p>
+    <p>min 100 images par class</p>
     <div class="categories">
       {% for key, set in sets_output.items %}
         <div class="category">
@@ -24,7 +24,7 @@
             {% for class in set %}
               <li class="category-class">
                 <p class="category-class__name">{{ class.class_name }}</p>
-                <p class="category-class__percentage">{% widthratio class.class_count sets_output|length 10 %}%</p>
+                <!-- <p class="category-class__percentage">{% widthratio class.class_count sets_output|length 10 %}%</p> -->
                 <p class="category-class__count">{{ class.class_count }} images</p>
               </li>
             {% endfor %}
