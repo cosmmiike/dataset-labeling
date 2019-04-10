@@ -19,7 +19,8 @@
       <div class = "labeling__photo">
         <div class="labeling__img-url">
           <button class="labeling__copy-url" id="copyButton">Copy</button>
-          <a class="labeling__remove" href="/remove/?id_photo={{ photo_num }}">R</a>
+          <a class="labeling__remove" href="/remove/?id_photo={{ photo_num }}" style="
+          background-image: url({% static 'labeling/img/bin.svg' %});"></a>
           <input class="labeling__url" id="copyTarget" type="text" value="{{ photo }}" readonly>
         </div>
         <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">

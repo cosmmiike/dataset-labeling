@@ -30,6 +30,7 @@
 
 .labeling__img-url {
   width: 350px;
+  height: 30px;
   margin-bottom: 20px;
   border-radius: 6px;
   font-size: 14px;
@@ -40,7 +41,8 @@
 .labeling__url {
   float: right;
   width: 240px;
-  padding: 6px 12px;
+  height: 30px;
+  padding: 0 12px;
   padding-right: 0;
   border: none;
   border-radius: 6px;
@@ -55,7 +57,8 @@
 }
 
 .labeling__copy-url {
-  padding: 6px 12px;
+  height: 30px;
+  padding: 0 12px;
   background-color: rgb(100, 180, 80);
   border: none;
   border-radius: 6px;
@@ -77,9 +80,13 @@
 }
 
 .labeling__remove {
+  height: 30px;
   float: right;
-  padding: 6px 12px;
+  padding: 0 12px;
   background-color: rgb(220, 220, 220);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% 80%;
   border: none;
   border-radius: 6px;
   font-size: 14px;
@@ -280,6 +287,7 @@
 .category-class__percentage {
   display: inline-block;
   margin: 0;
+  vertical-align: top;
   margin-right: 15px;
   margin-bottom: 10px;
 }
@@ -298,6 +306,7 @@
 }
 
 .category-class__count {
+  padding: 5px 8px;
   font-size: 14px;
   color: rgb(180, 180, 180);
 }

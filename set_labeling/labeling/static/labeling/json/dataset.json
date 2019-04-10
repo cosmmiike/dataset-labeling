@@ -757,13 +757,6 @@
             "volume": "2"
         },
         {
-            "url": "labeling/img/hair/hair-1271.jpg",
-            "frisure": "0",
-            "couleur": "3",
-            "longeur": "3",
-            "volume": "0"
-        },
-        {
             "url": "labeling/img/hair/hair-1272.jpg",
             "frisure": "0",
             "couleur": "0",
@@ -1406,13 +1399,6 @@
             "couleur": "0",
             "longeur": "2",
             "volume": "0"
-        },
-        {
-            "url": "labeling/img/hair/hair-1458.jpg",
-            "frisure": "0",
-            "couleur": "0",
-            "longeur": "2",
-            "volume": "1"
         },
         {
             "url": "labeling/img/hair/hair-1462.jpg",
@@ -2122,13 +2108,6 @@
             "volume": "1"
         },
         {
-            "url": "labeling/img/hair/hair-1695.jpg",
-            "frisure": "1",
-            "couleur": "2",
-            "longeur": "0",
-            "volume": "0"
-        },
-        {
             "url": "labeling/img/hair/hair-1696.jpg",
             "frisure": "2",
             "couleur": "2",
@@ -2252,13 +2231,6 @@
             "frisure": "0",
             "couleur": "0",
             "longeur": "2",
-            "volume": "1"
-        },
-        {
-            "url": "labeling/img/hair/hair-1735.jpg",
-            "frisure": "2",
-            "couleur": "0",
-            "longeur": "0",
             "volume": "1"
         },
         {
@@ -4010,6 +3982,97 @@
             "couleur": "0",
             "longeur": "3",
             "volume": "0"
+        },
+        {
+            "url": "labeling/img/hair/hair-1230.jpeg",
+            "frisure": "1",
+            "couleur": "4",
+            "longeur": "0",
+            "volume": "1"
+        },
+        {
+            "url": "labeling/img/hair/hair-1271.jpg",
+            "frisure": "1",
+            "couleur": "4",
+            "longeur": "3",
+            "volume": "0"
+        },
+        {
+            "url": "labeling/img/hair/hair-1393.jpeg",
+            "frisure": "0",
+            "couleur": "5",
+            "longeur": "3",
+            "volume": "0"
+        },
+        {
+            "url": "labeling/img/hair/hair-1648.jpeg",
+            "frisure": "2",
+            "couleur": "4",
+            "longeur": "2",
+            "volume": "2"
+        },
+        {
+            "url": "labeling/img/hair/hair-1695.jpg",
+            "frisure": "1",
+            "couleur": "4",
+            "longeur": "0",
+            "volume": "0"
+        },
+        {
+            "url": "labeling/img/hair/hair-1723.jpeg",
+            "frisure": "0",
+            "couleur": "4",
+            "longeur": "4",
+            "volume": "1"
+        },
+        {
+            "url": "labeling/img/hair/hair-1755.jpeg",
+            "frisure": "0",
+            "couleur": "4",
+            "longeur": "0",
+            "volume": "1"
+        },
+        {
+            "url": "labeling/img/hair/hair-1779.jpeg",
+            "frisure": "2",
+            "couleur": "4",
+            "longeur": "2",
+            "volume": "0"
+        },
+        {
+            "url": "labeling/img/hair/hair-1837.jpeg",
+            "frisure": "2",
+            "couleur": "4",
+            "longeur": "0",
+            "volume": "2"
+        },
+        {
+            "url": "labeling/img/hair/hair-1927.jpeg",
+            "frisure": "0",
+            "couleur": "4",
+            "longeur": "0",
+            "volume": "1"
+        },
+        {
+            "url": "labeling/img/hair/hair-1940.jpg",
+            "frisure": "2",
+            "couleur": "4",
+            "longeur": "0",
+            "volume": "1"
+        },
+        {
+            "url": "labeling/img/hair/hair-196.jpg",
+            "frisure": "1",
+            "couleur": "4",
+            "longeur": "1",
+            "volume": "0"
+        },
+        {
+            "url": "labeling/img/hair/hair-2088.jpeg",
+            "frisure": "2",
+            "couleur": "1",
+            "longeur": "1",
+            "volume": "2"
         }
     ]
 }

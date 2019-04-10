@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 import os
+import shutil
 import json
 
 
@@ -114,3 +115,45 @@ def stats_view(request):
     context['sets_output'] = sets_output
 
     return render(request, 'labeling/stats.html', context=context)
+
+
+def sort_view(request):
+    json_dir = os.path.dirname(os.path.abspath(__file__)) + '/static/labeling/json/'
+    img_dir = os.path.dirname(os.path.abspath(
+        __file__)) + '/static/labeling/img/hair/'
+
+    with open(json_dir + 'sets.json') as json_file:
+        sets = json.load(json_file)
+
+    with open(json_dir + 'dataset.json') as json_file:
+        data = json.load(json_file)
+
+    sorted_dir = os.path.exists(img_dir + '../sorted/')
+    if not sorted_dir:
+        os.makedirs(img_dir + '../sorted/')
+
+    sets_num = len(sets)
+    set_titles = list(sets.keys())
+
+    for title in set_titles:
+        dir = img_dir + '../sorted/' + title + '/'
+        exists_dir = os.path.exists(dir)
+        if exists_dir:
+            shutil.rmtree(dir)
+        os.makedirs(dir)
+        print(sets[title])
+
+        for i, set_class in enumerate(sets[title]):
+            class_dir = dir + str(i) + '/'
+            exists_class_dir = os.path.exists(class_dir)
+            os.makedirs(class_dir)
+            image_url = data['data'][0]['url']
+
+            for image in data['data']:
+                if image[title] == str(i):
+                    print(image[title], set_class, image['url'])
+                    image_fullpath = os.path.dirname(os.path.abspath(
+                        __file__)) + '/static/' + image['url']
+                    shutil.copy2(image_fullpath, class_dir)
+
+    return stats_view(request)
