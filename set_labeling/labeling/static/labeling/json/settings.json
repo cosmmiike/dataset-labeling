@@ -1,0 +1,5 @@
+{
+  "dataset": "/labeling/default/digital_hair_care/img/raw/",
+  "classes": "/labeling/default/digital_hair_care/json/sets.json",
+  "annotations": ""
+}

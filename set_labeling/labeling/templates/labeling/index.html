@@ -14,22 +14,24 @@
 
 <body>
   <div class="labeling">
-    <h1 class="labeling__title">Dataset Labeling : {{ photo_num }}</h1>
+    <div><p>{{ username }} ( <a href="/logout">logout</a> ) </p></div>
+    <div><p><a href="/stats">Statistique</a></p></div>
+    <h1 class="labeling__title">Dataset Labeling</h1>
     <div class="labeling__container">
       <div class = "labeling__photo">
         <div class="labeling__img-url">
           <button class="labeling__copy-url" id="copyButton">Copy</button>
           <a class="labeling__remove" href="/remove/?id_photo={{ photo_num }}" style="
           background-image: url({% static 'labeling/img/bin.svg' %});"></a>
-          <input class="labeling__url" id="copyTarget" type="text" value="{{ photo }}" readonly>
+          <input class="labeling__url" id="copyTarget" type="text" value="{{ photo_name }}" readonly>
         </div>
-        <img class = "labeling__img" src="{% static photo %}" alt="Test photo" width="350">
+        <img class = "labeling__img" src="{% static photo_url %}" alt="Test photo" width="350">
       </div>
       <p class="fix"></p>
     </div>
     <form class="sets" action="?id_photo={{ photo_num|add:1 }}" method="POST">
       {% csrf_token %}
-      <input type="hidden" name="photo-url" value="{{ photo }}">
+      <input type="hidden" name="photo-name" value="{{ photo_name }}">
       <ul class="sets__list">
         {% for key, set in sets.items %}
         <li class="set" id="set-{{ forloop.counter }}">
@@ -71,7 +73,6 @@
         <a class="set__switch-link" id="switch-prev" href="?id_photo={{ photo_num|add:-1 }}">← Prev</a>
         <a class="set__switch-link" id="switch-next" href="?id_photo={{ photo_num|add:1 }}">Next →</a>
       </div>
-      <a href="/stats">Statistique</a>
     </form>
   </div>
 

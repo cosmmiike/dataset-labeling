@@ -40,12 +40,12 @@
 
 .labeling__url {
   float: right;
-  width: 240px;
+  width: 250px;
   height: 30px;
   padding: 0 12px;
   padding-right: 0;
   border: none;
-  border-radius: 6px;
+  border-radius: none;
   font-size: 14px;
   background-color: rgb(245, 245, 245);
   color: rgb(150, 150, 150);
@@ -53,7 +53,7 @@
 
 .labeling__url:focus {
   outline: none;
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(245, 245, 245);
 }
 
 .labeling__copy-url {
@@ -86,7 +86,7 @@
   background-color: rgb(220, 220, 220);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 80% 80%;
+  background-size: 70% 70%;
   border: none;
   border-radius: 6px;
   font-size: 14px;
